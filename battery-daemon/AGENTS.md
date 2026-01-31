@@ -11,6 +11,7 @@ It currently targets **Linux** only.
 2.  **Platform**: Target Linux. Prefer `musl` build to avoid libc compatibility issues.
 3.  **Documentation**: Code must be heavily commented. Explain *why* something is done, not just *what*.
 4.  **Architecture**:
+    *   **Slim main.rs**: Prefer a slim `main.rs`, move implementation logic to `lib.rs`.
     *   **Pluggable Battery Interface**: The mechanism for retrieving battery status must be abstracted behind a trait/interface.
     *   **Pluggable Notification Interface**: The mechanism for notifying the user must be abstracted behind a trait/interface.
 
