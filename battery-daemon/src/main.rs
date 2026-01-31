@@ -1,5 +1,7 @@
+use battery_daemon::config::Config;
 use battery_daemon::run_daemon;
 
 fn main() {
-    run_daemon();
+    let config = Config::load();
+    run_daemon(config);
 }

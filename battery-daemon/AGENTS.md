@@ -15,12 +15,26 @@ It currently targets **Linux** only.
     *   **Pluggable Battery Interface**: The mechanism for retrieving battery status must be abstracted behind a trait/interface.
     *   **Pluggable Notification Interface**: The mechanism for notifying the user must be abstracted behind a trait/interface.
 
+## Configuration
+The daemon supports configuration via the following methods, in order of precedence (highest to lowest):
+
+1.  **Command Line Arguments**:
+    *   `--interval <SECONDS>` or `-i <SECONDS>`: Set the check interval (default: 60).
+    *   `--threshold <PERCENT>` or `-t <PERCENT>`: Set the low battery threshold (default: 30).
+2.  **Environment Variables**:
+    *   `BATTERY_DAEMON_INTERVAL`: Set the check interval.
+    *   `BATTERY_DAEMON_THRESHOLD`: Set the low battery threshold.
+3.  **Configuration File**:
+    *   Located at `$XDG_CONFIG_HOME/battery-daemon/config` or `~/.config/battery-daemon/config`.
+    *   Format is `key=value`. Supported keys: `interval`, `threshold`.
+
 ## Architecture
 
 ### Modules
 *   `src/traits.rs`: Definitions of `BatteryMonitor` and `Notifier` traits.
 *   `src/battery/`: Implementations for battery monitoring (e.g., via `/sys/class/power_supply` or `upower`).
 *   `src/notifier/`: Implementations for user notification (e.g., via `notify-send` or direct DBus if feasible without crates).
+*   `src/config.rs`: Handles loading configuration from various sources.
 
 ### Implementation Details
 *   **Battery Monitoring**: The default implementation should prefer reading from `/sys/class/power_supply` as it requires no external binaries.
