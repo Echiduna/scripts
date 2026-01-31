@@ -1,5 +1,5 @@
 [package]
-name = "battey-daemon"
+name = "battery-daemon"
 version = "0.1.0"
 edition = "2024"
 
